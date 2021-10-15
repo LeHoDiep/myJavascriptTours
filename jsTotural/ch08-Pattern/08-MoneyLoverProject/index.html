@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Money Lover</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center text-info">
+            Money Lover
+        </h1>
+        <form class="shadow mb-3 p-2">
+            <div class="mb-3">
+                <input type="text" placeholder="Tên" class="form-control" id="name">
+            </div>
+            <div class="mb-3">
+                <input type="number" placeholder="Giá Tiền" class="form-control" id="amount">
+            </div>
+            <button class="btn btn-primary mb-3" id="btn-add">Thêm</button>
+            <div class="d-none justify-content-between" id="btn-group">
+                <div>
+                    <button class="btn btn-dark" id="btn-back">Quay về</button>
+                    <button class="btn btn-primary" id="btn-edit">Lưu</button>
+                </div>
+                    <button class="btn btn-danger" id="btn-remove">Xóa</button>
+            </div>
+        </form>
+
+        <div class="mb-3 d-flex justify-content-between">
+            <h2>Tổng chi phí : <span id="amountTotal">15000</span></h2>
+            <button class="btn btn-danger" id="btn-remove-all">Xóa tất cả</button>
+        </div>
+
+        <div class="list">
+            <!-- <div class="card p-2 flex-row align-items-center justify-content-between mb-3">
+                <span>Tên Việc</span>
+                <button class="btn btn-small btn-info">Sửa</button>
+            </div> -->
+        </div>
+    </div>
+    <script src="./app.js" type='module'></script>
+</body>
+
+</html>

@@ -1,0 +1,14 @@
+.tab-content-item{
+    display: none;
+    width: 300px;
+}
+.tab-content-item.active{
+    display: block;
+}
+.tab-content-item img{
+    width: 100%;
+    height: auto;
+}
+.navtab-btn.active{
+    background-color: aqua;
+}

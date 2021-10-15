@@ -1,0 +1,160 @@
+<!-- webpack là gì
+chúng ta phải hiểu rằng webpack sinh ra làm gì:
+ban đầu mọi người làm 1 project với 3 file đơn giản là 
+index.html  style.js    app.js
+nhưng càng ngày css hay js càng phát triễn.chúng ta có sass less 
+ES6 ES2018  ES2019
+phát sinh vấn đề, trình duyệt cũ k thể chạy đc các cú pháp mới
+                cần nén code lại để giảm dung lượng,tăng tốc độ load trang
+
+nếu mỗi vấn đề đều phải dùng các công cụ riêng thì mất tính đồng bộ
+vậy nên webpack sinh ra để giải quyết các vấn đề trên
+webpack chạy trên môi trường nodejs
+        giúp đóng gói js, css, image, font
+                thành 1 hay nhiều file 1 cách dể dàng
+giờ mình cài nodeJS trước
+npm là công cụ quản lý các thư viện
+xưa muốn tải thư viện nào thì phải vảo trang ngta tải
+giờ có npm hoặc yarn(fb)
+//1
+trong folder này tạo package.js bằng npm init
+//2 
+viết file index noscript và src="../dist/bundle.js"
+//3
+tạo file .gitignore
+vào gitignore.io search node
+tìm dòng 45 thêm dist để bỏ dist đi
+
+//4
+cài đặt babel
+babel: là trình biên dịch js thành các function thấp hơn để phù hợp
+        cho các trình duyệt khác nhau
+        mình có thể chạy babel k cần webpack
+        nhưng trong bài này mình dùng chung với webpack để đạt hiệu quả cao 
+        "npm i @babel/core @babel/preset-env babel-loader @babel/plugin-transform-runtime --save-dev"
+sau khi cài xong trong package.js sẽ có mục devDependencies
+có chứa các thông tin lib mà mình đã cài
+xuất hiện thêm 1 nodeModule nơi chứa các thư mục lib
+    "@babel/core"                       lõi,thuật toán của babel
+    "@babel/plugin-transform-runtime"   giúp babel tác dùng đc trên asyn await
+    "@babel/preset-env"                 bộ cài đặt giúp biên dịch js thành có                                                   pháp cũ hơn
+    "babel-loader"                      giúp tích hợp babel vào webpack
+
+//5
+cài đặt style-loader file-loader 
+"npm i css-loader file-loader sass sass-loader style-loader -D"
+//-D tương ứng  –save-dev ám chỉ devDependencies
+    "css-loader"        giúp import css vào js
+    "file-loader"       giúp import css,image,video vào file js
+    "sass"              cú pháp khác của css
+    "sass-loader"       giúp import sass vào js
+    "style-loader"      giúp import css vào js
+
+//6 
+cài đặt webpack
+"npm i webpack webpack-cli webpack-dev-server -D"
+    "webpack"                   là phần lõi của webpack
+    "webpack-cli"               giúp ta gõ đc lệnh webpack trên terminal
+    "webpack-dev-server"        hỗ trợ tạo server localhost cho môi trường dev
+
+//7
+tạo file webpack.config.js
+thêm code
+--
+vào package thêm 2 task cho script
+là 
+"start": "webpack serve --mode development",
+"build": "webpack --mode production"
+giải thích file vừa làm
+
+
+//8
+tạo folder src cho giống entry
+'npm run start'
+//9
+cài bootstrap thông qua npm
+npm i bootstrap@next
+
+mở module lên check là có
+và ta sẽ nhìn thấy bên trong nó có boostrap.scss
+nhiệm vụ của mình là import nó vào để xài
+
+giờ mình qua index.js để import nó
+
+//10 tiến hành tạo giao diện bên html thôi
+-->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <title>Blog management</title>
+</head>
+<body>
+    <!-- giao diện dể thương số dách -->
+    <div class="container">
+        <h1 class="text-center text-info">Blog Management</h1>
+        <!-- form đăng ký nè -->
+        <form class="mb-3">
+
+            <div class="mb-3">
+                <input type="text" class="form-control" id="title"
+                placeholder="Title">
+            </div>
+
+            <div class="mb-3">
+                <textarea id="description" class="form-control"
+                placeholder="Title"></textarea>
+            </div>
+
+            <button class="btn btn-primary" id="btn-add">Add</button>
+
+            <div class="d-none justify-content-between" id="btn-group">
+                <button class="btn btn-dark" id="btn-back">Back</button>
+                <button class="btn btn-info" id="btn-edit">Edit</button>
+            </div>
+        </form>
+        <!-- notification -->
+        <div id="notification"></div>
+        <!-- list danh sách nè -->
+        <h2 class="mb-3 text-center text-info">List</h2>
+        <div id="list">
+            <!-- <div class="card p-2 d-flex flex-row 
+            justify-content-between 
+            align-items-center mb-3">
+                <div>
+                    <p><strong>title bla bla bla</strong></p>
+                    <p>description bla bla bla</p>
+                </div>
+                <div >
+                    <button class="btn btn-info btn-start-edit">Edit</button>
+                    <button class="btn btn-danger btn-remove">Remove</button>
+                </div>
+            </div> -->
+                <!-- Mình cố tình k đặt id cho nút xóa vì có nhiều nút xóa -->
+        </div>
+    </div>
+
+    <!-- giao diện dể thương số dách -->
+
+    <noscript>
+            You need to enable to js to run this app
+    </noscript>
+    <script src="../dist/bundle.js"></script>
+    <!-- file index này đang chạy 1 file js ảo
+         mình sẽ tạo ra file bundle sau khi làm xong chương trình -->
+</body>
+</html>
+    <!--11
+        sau khi tạo xong resource rồi thì tạo table mới bên 
+        mockup api [new resrc]
+        articles
+        id
+        createAt
+        title           job title
+        description     job description
+
+        12
+        trong src tạo http.js
+        vào đó code class http để get api nha
+
+        
+    -->
